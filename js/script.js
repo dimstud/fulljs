@@ -25,6 +25,10 @@ dayValue = document.querySelector(".day-value");
 
 let money, time;
 
+expensesBtn.disable = true;
+optionalExpensesBtn.disable = true;
+countBtn.disable = true;
+
 
 startBtn.addEventListener("click", function() {
     time = prompt("Введите дату в формате YYYY-MM-DD", "");
@@ -39,6 +43,10 @@ startBtn.addEventListener("click", function() {
     yearValue.value = new Date(Date.parse(time)).getFullYear();
     monthValue.value = new Date(Date.parse(time)).getMonth() + 1;
     dayValue.value = new Date(Date.parse(time)).getDate();
+
+    expensesBtn.disable = false;
+    optionalExpensesBtn.disable = false;
+    countBtn.disable = false;
 });
 
 expensesBtn.addEventListener("click", function() {
@@ -53,7 +61,6 @@ expensesBtn.addEventListener("click", function() {
             appData.expenses[a] = b;
             sum += +b;
         } else {
-            console.log("bad result");
             i = i - 1;
         }
     }
@@ -88,9 +95,11 @@ countBtn.addEventListener("click", function() {
 });
 
 incomeItem.addEventListener("input", function() {
-    let item = incomeItem.value;
-    appData.income = item.split(", ");
+    let items = incomeItem.value;
+    if (isNaN(items) || items != "") {
+        appData.income = items.split(", ");
     incomeValue.textContent = appData.income;
+    }
 });
 
 checkSavings.addEventListener("click", function() {
@@ -135,8 +144,3 @@ let appData = {
     income: [],
     savings: false
 };
-
-for (let key in appData) {
-    console.log("Наша программа включает в себя данные: " + key + " - " + appData[key]);
-}
-
