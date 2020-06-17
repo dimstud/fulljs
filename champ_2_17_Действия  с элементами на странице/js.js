@@ -6,7 +6,7 @@ let box = document.getElementById('box'),
     circle = document.getElementsByClassName('circle'),
     //Получение элемента через селектор с точкой (все class)
     heart = document.querySelectorAll('.heart'),
-    //Получение элемента через селектор с точкой (первый или один селектор(class))
+    //Получение элемента через селектор с точкой (первый или один селекторclass)
     oneHeart = document.querySelector('.heart'),
     wrapper = document.querySelector('.wrapper');
 
