@@ -1,64 +1,51 @@
-//Получение элемента через id
-let box = document.getElementById('box'),
-    //Получение элемента через tag
-    btn = document.getElementsByTagName('button'), 
-    //Получение элемента через class (все)
-    circle = document.getElementsByClassName('circle'),
-    //Получение элемента через селектор с точкой (все class)
-    heart = document.querySelectorAll('.heart'),
-    //Получение элемента через селектор с точкой (первый или один селекторclass)
-    oneHeart = document.querySelector('.heart'),
-    wrapper = document.querySelector('.wrapper');
+//Получаем элемент со страницы через querySelectorAll чтобы работал метода forEatch
+let btn = document.querySelectorAll('button'),
+    wrap = document.querySelector('.wrapper'),
+    //Получение элемента для удаления стандартного поведения браузера
+    link = document.querySelector('a');
 
-//Изменение элемента через JS изменив CSS значение
-box.style.backgroundColor = 'blue';
-btn[1].style.borderRadius = '100%';
+//Взаимодействие при клике на элемент (одна функция на один элемент)
+// btn[0].onclick = function() {
+//     alert('Вы нажали на первую кпопку')
+// };
 
-circle[0].style.backgroundColor = 'red';
-circle[1].style.backgroundColor = 'yellow';
-circle[2].style.backgroundColor = 'green';
-
-//Изменение элемента через JS цикл изменив CSS значение
-// for (let i = 0; i < heart.length; i++) {
-//     heart[i].style.backgroundColor = 'blue';
-// }
-
-//Изменение элемента через JS цикл изменив CSS значение
-
-// heart.forEach(function(item, i, hearts) {
-//     item.style.backgroundColor = 'blue';
-// }); 
-// для того чтобы добавить новый элемент
-let div = document.createElement('div'),
-    text = document.createTextNode('Тут был я');
-//Добавить class к элементу
-div.classList.add('black');
-
-//Ставим элемент в разметку (в конец body)
-// document.body.appendChild(div);
+// //Взаимодействие при клике на элемент(несколько функций на один элемент)
+// btn[0].addEventListener('click', function() {
+//     alert('Вы нажали на первую кпопку');
+//     alert('Вы опять нажали на первую кпопку');
+// });
 
 
-//Ставим элемент в разметку (в конец wrapper)
-// wrapper.appendChild(div);
+// //Взаимодействие при навидение мыши на элемент(несколько функций на один элемент)
+// btn[0].addEventListener('mouseenter', function() {
+//     alert('Вы навели на первую кнопку');
+// });
 
+//Для того чтобы узнать какое событие произошло
+// btn[0].addEventListener('click', function(event) {
+    
+    //Для того чтобы произвести другие дейстия с элементом
+    // let target = event.target;
+    //Удаляет элемент
+    // target.style.display = 'none';
 
-//Вставить HTML ког на страницу
-// div.innerHTML = '<h1>Hello World</h1>';
+    // console.log('Произошло событие: ' + event.type + ' на элементе' + event.target);
+// });
 
+// wrap.addEventListener('click', function() {
+//     console.log('Произошло событие: ' + event.type + ' на элементе' + event.target);
+// });
 
-//Вставить HTML ког на страницу(безопасный)
-div.textContent = "Hello World";
+//Удаление стандартного поедения браузера
+link.addEventListener('click', function(event) {
+    event.preventDefault();
+    console.log('Произошло событие: ' + event.type + ' на элементе' + event.target);
+});
 
-//Ставим элемент перед имеющиемся (вначале body)
-document.body.insertBefore(div, circle[0]);
+// Отменяем стандартное поведение ьраузера у всех элементов группы
+btn.forEach(function(item) {
+    item.addEventListener('mouseleave', function() {
+        console.log("Мы вышли");
+    });
+});
 
-//Удалить элемент со страницы
-document.body.removeChild(circle[1]);
-wrapper.removeChild(heart[1]);
-
-//Замена одного элемента на другой
-document.body.replaceChild(btn[1], circle[1]);
-
-
-console.log(div);
-console.log(text);
