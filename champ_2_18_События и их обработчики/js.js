@@ -48,4 +48,3 @@ btn.forEach(function(item) {
         console.log("Мы вышли");
     });
 });
-
