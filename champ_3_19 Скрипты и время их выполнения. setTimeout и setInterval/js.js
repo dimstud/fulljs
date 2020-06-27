@@ -37,9 +37,11 @@ let btnBlock = document.querySelector('.btn-block'),
     btns = document.getElementsByTagName('button');
 
 btnBlock.addEventListener('click', function(e) {
+    // Обычный способ обратиться к элементу 
     // if (e.target && e.target.classList.contains('first')) {
     //     console.log("Hello");
     // }
+    // Как в Google
     if (e.target && e.target.classList.matches('button.first')) {
         console.log("Hello");
     }
