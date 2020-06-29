@@ -37,8 +37,22 @@ console.log(height);
 // Получение координатов элемента
 console.log(box.getBoundingClientRect());
 
+// Чтобы получить ширину документа
+console.log(document.documentElement.clientWidth);
+
+// Чтобы получить высоту документа
+console.log(document.documentElement.clientHeight);
+
 // Прокрутить вверх, единственное значение которое  можно изменять
 btn.addEventListener('click', function() {
     console.log(box.scrollTop);
     box.scrollTop = 0;
 });
+
+
+// Перемещение страницы по координатам x, y относилетьно нашего положения
+// 1) на столько пикселей вниз
+scrollBy(0, 200);
+
+//2) в определённое место в пикселях
+scrollTo(0, 200);
