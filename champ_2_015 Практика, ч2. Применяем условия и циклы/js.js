@@ -1,4 +1,4 @@
-/* Задание на урок:
+/* 012 Задание на урок:
 
 1) Создать переменную numberOfFilms и в неё поместить ответ от пользователя на вопрос:
 'Сколько фильмов вы уже посмотрели?'
@@ -21,28 +21,10 @@
 
 Проверить, чтобы все работало без ошибок в консоли */
 
-'use strict';
-
-const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
-
-const personalMovieDB = {
-    count: numberOfFilms,
-    movies: {},
-    actors: {},
-    genres: [],
-    privat: false
-};
 
 
-    for (let i = 0; i < 2; i++) {
-        const a = prompt('Один из последних просмотренных фильмов?', ''),
-    b = prompt('На сколько оцените его?', '');
-    personalMovieDB.movies[a] = b;
-    }
 
-    console.log(personalMovieDB);
-
-    /* 015 Задание на урок:
+/* 015 Задание на урок:
 
 1) Автоматизировать вопросы пользователю про фильмы при помощи цикла
 
@@ -56,6 +38,37 @@ const personalMovieDB = {
 
 4) Потренироваться и переписать цикл еще двумя способами*/
 
-'use strict';
 
 // Код возьмите из предыдущего домашнего задания
+
+'use strict';
+
+const numberOfFilms = +prompt('Сколько фильмов вы уже посмотрели?', '');
+
+const personalMovieDB = {
+    count: numberOfFilms,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: false
+};
+
+
+for (let i = 0; i < 2; i++) {
+    const a = prompt('Один из последних просмотренных фильмов?', ''),
+        b = prompt('На сколько оцените его?', '');
+
+    if (a != null && b != null && a != '' && b != '' && a.length < 50) {
+        personalMovieDB.movies[a] = b;
+        console.log('done');
+    } else {
+        console.log('error');
+        i--;
+    }
+}
+
+if (personalMovieDB.count < 10) {
+    console.log("Просмотрено довольно мало фильмов");
+}
+
+console.log(personalMovieDB);
