@@ -1,35 +1,114 @@
 "use strict";
 
-const arr = [1, 2, 3, 6, 8, 10];
+let a = 5,
+    b = a;
 
-console.log(arr.length); // Количество элементов
+b = b + 5;
 
-arr.pop(); // удаляет последний
-arr.push(10); // добавляет в конец массива
-arr.sort(compareNum);
-// Для сортировки чисел
-function compareNum(a, b) {
-    return a - b;
-}
+console.log(b);
 
-console.log(arr);
-
-// Цикл перебора массива
-for (let i = 0; i < arr.length; i++) {
-    console.log(arr[i]);
+const obj = {
+    a: 5,
+    b: 1
 };
 
-// Цикл перебора только для массива
-for (let value of arr) {
-    console.log(value);
+const copy = obj; // Ссылка
+
+copy.a = 10; // это полуается ссылка на obj 
+
+
+
+// Полное копирование объекта поверхностное
+function copyr(manObj) {
+    let objCopyr = {};
+
+    let key;
+    for (key in manObj) {
+        objCopyr[key] = manObj[key];
+    }
+    return objCopyr;
 }
 
-// Цикл перебора массива главный item-каждый элем. массива, i-номер по порядку, arr-сам массив
-arr.forEach(function(item, i, arr) {
-    console.log(`${i}: ${item} внутри массива ${arr}`)
-});
+const numbers = {
+    a: 2,
+    b: 5,
+    c: {
+        x: 7,
+        y: 4
+    }
+};
+// Клонирование объекта поверхностное
+const newNumbers = copyr(numbers);
 
-const str = prompt("", "");
-const products = str.split(", "); // разделитель ввода в массив
-products.sort();// сортировка
-console.log(products.join("; ")); // разделитель вывода на строничку
+newNumbers.a = 10;
+newNumbers.c.x = 10;
+
+console.log(newNumbers);
+console.log(numbers);
+
+
+
+const add = {
+    d: 17,
+    e: 20
+};
+
+
+
+// помешение в объект numbers - куда помещать, add - что помещать
+// console.log(Object.assign(numbers, add));
+
+// Клонировать в пусстой объект
+const clone = Object.assign({}, add);
+
+clone.d = 20;
+
+console.log(add);
+console.log(clone);
+
+
+
+
+// Клонирование массива поверхностная
+const oldArray = ['a', 'b', 'c'];
+const newArray = oldArray.slice();
+
+newArray[1] = 'asasasa';
+
+console.log(newArray);
+console.log(oldArray);
+
+
+// Новый способ клонирования
+const video = ['youtube', 'vimeo', 'rutube'],
+    blogs = ['wordpress', 'livejounal', 'blogger'],
+    internet = [...video, ...blogs, 'vk', 'facebook'];// спрет оператор
+
+    console.log(internet);
+
+
+    // Передача из массива в объект
+    function log(a, b, c) {
+        console.log(a);
+        console.log(b);
+        console.log(c);
+    }
+
+    const num = [2, 5, 7];
+
+    log(...num);
+
+
+
+
+    const array = ['a', 'b'];
+
+    const newAarray = [...array];
+
+
+    const q = {
+        one: 1,
+        two: 2
+    };
+
+    const newObj = {...q};
