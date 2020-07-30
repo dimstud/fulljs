@@ -1,76 +1,35 @@
-const btns = document.querySelectorAll('button'),
-      overlay = document.querySelector('.overlay');
+"use strict";
 
-// btn.onclick = function() {
-//     alert('Click');
-// };
+console.log(document.body);
+console.log(document.documentElement); //оплный элемент
 
-// btn.onclick = function() {
-//     alert('Second click');
-// };
+console.log(document.body.childNodes); //дочерние тэги перенос тоже является нодой
 
-// Действие после клика
-// btns.addEventListener('click',() => {
-//     alert('Click');
-// });
+console.log(document.body.firstChild); // первый дочерний элемент
 
-// // Повторно появляется
-// btns.addEventListener('click',() => {
-//     alert('Second click');
-// });
+console.log(document.body.firstElementChild); // первый дочерний элемент
 
+console.log(document.body.lastChild); // последний дочерний элемент
 
+console.log(document.body.lastElementChild); // последний дочерний элемент
 
-// Действие после наведения event = e
-// btn.addEventListener('mouseenter',(e) => {
-//     console.log(e.target);
-//     e.target.remove();
-//     console.log('Hover');
-// });
+console.log(document.querySelector('#current').parentNode); //получает родителя элемента
+console.log(document.querySelector('#current').parentNode.parentNode); //получает родителя, родителя элемента
 
+console.log(document.querySelector('#current').parentElement); //получает родителя, родителя элемента
 
-// Чтобы можно было удалить обработчик собития
+console.log(document.querySelector('[data-current="3"]')); //получает атрибут HTML data
+console.log(document.querySelector('[data-current="3"]').nextSibling); //получает следующую ноду сосед
+console.log(document.querySelector('[data-current="3"]').previousSibling); //получает предыдущую ноду сосед
 
-// let i = 0;
-// const deleteElement = (e) => {
-//     console.log(e.target);
-//     i++;
-//     if (i == 1) {
-//         btn.removeEventListener('click', deleteElement);
-//     }
-// }; 
+console.log(document.querySelector('[data-current="3"]').previousElementSibling); //получает предыдущий элемент сосед
 
-// btn.addEventListener('click', deleteElement);
+console.log(document.querySelector('[data-current="3"]').nextElementSibling); //получает следующий элемент сосед
 
-// Всплытие событий, сначала внутренее и по иерархии
+for (const node of document.body.childNodes) {
+    if (node.nodeName == '#text') {
+        continue;
+    }
 
-// let i = 0;
-const deleteElement = (e) => {
-    // console.log(e.currentTarget); показывает родителя
-    console.log(e.target);
-    console.log(e.type);
-    // i++;
-    // if (i == 1) {
-    //     btn.removeEventListener('click', deleteElement);
-    // }
-}; 
-
-// btns.addEventListener('click', deleteElement);
-// overlay.addEventListener('click', deleteElement);
-
-
-// once - опция которая значит выполнит один раз
-btns.forEach(btn => {
-    btn.addEventListener('click', deleteElement, {once: true});
-});
-
-
-
-// Отменяет стандартное поведения браузера
-let link = document.querySelector('a');
-
-link.addEventListener('click', (event) => {
-    event.preventDefault();
-
-    console.log(event.target);
-});
+    console.log(node);
+}
