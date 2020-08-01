@@ -1,35 +1,113 @@
-"use strict";
+// hammer.js - библиотека свайпов
 
-console.log(document.body);
-console.log(document.documentElement); //оплный элемент
+//Обычный таб
+//touchstart
 
-console.log(document.body.childNodes); //дочерние тэги перенос тоже является нодой
+//Когда прикоснулся к элементу и начал водить по нему
+//touchmove
 
-console.log(document.body.firstChild); // первый дочерний элемент
+//Когда убираешь палец
+//touchend
 
-console.log(document.body.firstElementChild); // первый дочерний элемент
+//Когда ведёшь палец и он папал область элемента
+//touchenter
 
-console.log(document.body.lastChild); // последний дочерний элемент
+//Когда ведёшь палец и он покидает область элемента
+//touchleave
 
-console.log(document.body.lastElementChild); // последний дочерний элемент
 
-console.log(document.querySelector('#current').parentNode); //получает родителя элемента
-console.log(document.querySelector('#current').parentNode.parentNode); //получает родителя, родителя элемента
+//Когда точка соприкоснавения уходит за область браузера
+//touchcencel
 
-console.log(document.querySelector('#current').parentElement); //получает родителя, родителя элемента
+window.addEventListener('DOMContentLoaded', function () {
+    const box = document.querySelector('.box');
 
-console.log(document.querySelector('[data-current="3"]')); //получает атрибут HTML data
-console.log(document.querySelector('[data-current="3"]').nextSibling); //получает следующую ноду сосед
-console.log(document.querySelector('[data-current="3"]').previousSibling); //получает предыдущую ноду сосед
+    // box.addEventListener('touchstart', function(e) {
+    //     e.preventDefault();
+    //     console.log("Red box: touchstart");
 
-console.log(document.querySelector('[data-current="3"]').previousElementSibling); //получает предыдущий элемент сосед
+    //     //все пальцы которые прикоснулись
+    //     // console.log(e.touches);
 
-console.log(document.querySelector('[data-current="3"]').nextElementSibling); //получает следующий элемент сосед
+    //     console.log(e.touches[0].target);
+    //     console.log(e.target);
 
-for (const node of document.body.childNodes) {
-    if (node.nodeName == '#text') {
-        continue;
-    }
+    //     //список пальцев которые взаймодействовали
+    //     console.log(e.changedTouches);
 
-    console.log(node);
-}
+    //     //Регестрируем те пальцы которые взаимодействуют с элементом
+    //     console.log(e.targetTouches);
+    // });
+
+    box.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+        console.log("Red box: " + e.touches[0].pageX);
+    });
+
+    //     box.addEventListener('touchend', function(e) {
+    //         e.preventDefault();
+    //         console.log("Red box: touchend");
+    //     });
+
+
+
+
+    //Регулярные выражения
+
+
+    // 1 вариант записи
+    // new RegExp('pattern', 'flags');
+
+    // 2 вариант записи
+    // /pattern/flags
+
+    // let ans = prompt('Введите ваше имя');
+
+    // let reg = /n/gi;
+    // // Ищем в строке букву n
+    // // console.log(ans.search(reg));
+
+    // // Работает с флагом g
+    // // console.log(ans.match(reg));
+    //Булево
+    // console.log(reg.test(ans));
+
+
+    //Флаги
+
+    // i - изкать независемо от регистра
+    // g - глобально во всех вхождениях все
+    // m - многострочность
+    // . - ищет или заменять любые символы
+
+
+    //Классы символов
+    // \d - найти цифру
+    // \D - найти не цифру
+    // \w - найти буквы
+    // \W - найти не букву
+    // \s - найти пробелы
+    // \S - найти не пробелы
+
+
+
+    //Метод Реплейс
+    // let pass = prompt("Введите пароль");
+
+    // //Скрывает заменяя на *
+    // console.log(pass.replace(/./g, "*"));
+    // // Заменяеь - на :
+    // alert('12-34-66'.replace(/-/g, ":"));
+
+    //Ищем все цифры
+    // let ans = prompt('Введите число');
+
+    // let reg = /\d/g;
+
+    // // Работает с флагом g
+    // console.log(ans.match(reg));
+
+    let str = 'My name is R2D2';
+
+    console.log(str.match(/\w\d\w\d/i));
+});
