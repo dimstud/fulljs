@@ -76,3 +76,12 @@
       margin-top: 30px;
       color: #fff;
   }
+  .blue{
+      background-color: blue;
+  }
+  .red{
+      background-color: red;
+  }
+  .btn-block{
+      background-color: rgb(192, 183, 183);
+  }
