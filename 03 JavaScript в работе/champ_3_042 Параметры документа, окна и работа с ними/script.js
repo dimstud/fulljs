@@ -1,52 +1,58 @@
-// const timerId =setTimeout(function(text) {
-    // console.log(text);
-// }, 2000, 'Hello!');
-// const timerId = setTimeout(function() {
-//     console.log('Hello!');
-// }, 2000);
+let box =document.querySelector('.box'),
+    btn = document.querySelector('button');
 
-const btn = document.querySelector('.btn');
-let timerId,
-    i = 0;
+    // Свойтво ширины не учитывая полосу прокрутки
+let width = box.clientWidth,
+    // Свойство высоты не учитывая полосу прокрутки
+    height = box.clientHeight;
 
-
-function myAnimation() {
-    const elem = document.querySelector('.box');
-    let pos = 0;
-
-    const id = setInterval(frame, 10);
-    function frame() {
-        if (pos == 300) {
-            clearInterval(id);
-        } else {
-            pos++;
-            elem.style.top = pos + 'px';
-            elem.style.left = pos + 'px';
-        }
-    }
-}
-
-btn.addEventListener('click', myAnimation);
+console.log(width);
+console.log(height);
 
 
-// btn.addEventListener('click', () => {
-//     // const timerId = setTimeout(logger, 2000);
-//     timerId = setInterval(logger, 500);
+//     // Свойтво ширины от border до border
+//     let width = box.offsetWidth,
+//     // Свойство высоты от border до border
+//     height = box.offsetHeight;
+
+// console.log(width);
+// console.log(height);
+
+
+//    // Свойтво ширины с учетом всей прокрутки ктороая скрывается под scroll
+//    let width = box.scrollWidth,
+//    // Свойство высоты с учетом всей прокрутки ктороая скрывается под scroll
+//    height = box.scrollHeight;
+
+// console.log(width);
+// console.log(height);
+
+
+// // Раскрыть весь текст который скрыт
+// btn.addEventListener('click', function() {
+//     box.style.height = box.scrollHeight + 'px';
+
 // });
 
+// Получение координатов элемента
+console.log(box.getBoundingClientRect());
+
+// Чтобы получить ширину документа
+console.log(document.documentElement.clientWidth);
+
+// Чтобы получить высоту документа
+console.log(document.documentElement.clientHeight);
+
+// Прокрутить вверх, единственное значение которое  можно изменять
+btn.addEventListener('click', function() {
+    console.log(box.scrollTop);
+    box.scrollTop = 0;
+});
 
 
-// function logger() {
-//     if (i === 3) {
-//         clearInterval(timerId);
-//     }
-//     console.log('text');
-//     i++;
-// }
+// Перемещение страницы по координатам x, y относилетьно нашего положения
+// 1) на столько пикселей вниз
+scrollBy(0, 200);
 
-
-// Рекурсия
-// let id = setTimeout(function log() {
-//     console.log('Hello');
-//     id =setTimeout(log, 500);
-// }, 500);
+//2) в определённое место в пикселях
+scrollTo(0, 200);
