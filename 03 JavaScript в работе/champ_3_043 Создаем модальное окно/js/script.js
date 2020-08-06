@@ -43,8 +43,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // С использованием классов
     const tabs = document.querySelectorAll('.tabheader__item'),
-          tabsContent = document.querySelectorAll('.tabcontent'),
-          tabsParent = document.querySelector('.tabheader__items');
+        tabsContent = document.querySelectorAll('.tabcontent'),
+        tabsParent = document.querySelector('.tabheader__items');
 
 
     function hideTabContent() {
@@ -72,7 +72,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const target = event.target;
 
         if (target && target.classList.contains('tabheader__item')) {
-            tabs.forEach( (item, i) => {
+            tabs.forEach((item, i) => {
                 if (target == item) {
                     hideTabContent();
                     showTabContent(i);
@@ -94,19 +94,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function getTimeRemaining(endtime) {
         const t = Date.parse(endtime) - Date.parse(new Date()),
-              // Окрукление до близжайшего целого
-              days = Math.floor(t / (1000 * 60 * 60 * 24)),
-              // Вернет остатов
-              hours = Math.floor((t / (1000 * 60 * 60) % 24)),
-              minutes = Math.floor((t / 1000 / 60) % 60),
-             seconds = Math.floor((t / 1000) % 60);
+            // Окрукление до близжайшего целого
+            days = Math.floor(t / (1000 * 60 * 60 * 24)),
+            // Вернет остатов
+            hours = Math.floor((t / (1000 * 60 * 60) % 24)),
+            minutes = Math.floor((t / 1000 / 60) % 60),
+            seconds = Math.floor((t / 1000) % 60);
 
-        return{
+        return {
             'total': t,
-           'days': days,
-           'hours': hours,
-           'minutes': minutes,
-           'seconds': seconds
+            'days': days,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
         };
     }
 
@@ -120,11 +120,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
     function setClock(selector, endtime) {
         const timer = document.querySelector(selector),
-              days = timer.querySelector('#days'),
-              hours = timer.querySelector('#hours'),
-              minutes = timer.querySelector('#minutes'),
-              seconds = timer.querySelector('#seconds'),
-              timeInterval = setInterval(updateClock, 1000);
+            days = timer.querySelector('#days'),
+            hours = timer.querySelector('#hours'),
+            minutes = timer.querySelector('#minutes'),
+            seconds = timer.querySelector('#seconds'),
+            timeInterval = setInterval(updateClock, 1000);
 
         updateClock(); // запускаем здесь чтобы значение из верстки не отображалось на странице
 
@@ -143,4 +143,54 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     setClock('.timer', deadLine);
+
+
+
+
+    // Modal
+
+    const modalTrigger = document.querySelectorAll('[data-modal]'),
+        modal = document.querySelector('.modal'),
+        modalCloseBtn = document.querySelector('[data-close]');
+
+    modalTrigger.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // modal.classList.add('show');
+            // modal.classList.remove('hide');
+
+            // Для toggle
+            modal.classList.toggle('show');
+
+            // Чтобы задний фон не скролился
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    function closeModal() {
+        // modal.classList.add('hide');
+        // modal.classList.remove('show');
+
+        // Для toggle
+        modal.classList.toggle('show');
+
+        // Чтобы задний фон не скролился
+        document.body.style.overflow = '';
+    }
+
+    modalCloseBtn.addEventListener('click', closeModal);
+
+    // Чтобы закрывать нажатием за окно на фон
+    modal.addEventListener('click', (e) => {
+        if (e.target == modal) {
+            closeModal();
+        }
+    });
+
+
+    // Для того чтобы закрыть окно клавишей Esc
+    document.addEventListener('keydown', (e) => {
+        if ( e.code === "Escape" && modal.classList.contains('show') ) {
+            closeModal();
+        }
+    });
 });
