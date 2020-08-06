@@ -1,58 +1,25 @@
-let box =document.querySelector('.box'),
-    btn = document.querySelector('button');
+'use strict';
 
-    // Свойтво ширины не учитывая полосу прокрутки
-let width = box.clientWidth,
-    // Свойство высоты не учитывая полосу прокрутки
-    height = box.clientHeight;
+function User(name, id) {
+    this.name = name;
+    this.id = id;
+    this.human = true;
+    this.hello = function() {
+        console.log(`Hello ${this.name}`);
+    }
+}
 
-console.log(width);
-console.log(height);
+User.prototype.exit = function() {
+    console.log(`Пользователь ${this.name} ушёл`);
+};
 
+const ivan = new User('Ivan', 28);
+const alex = new User('Alex', 20);
 
-//     // Свойтво ширины от border до border
-//     let width = box.offsetWidth,
-//     // Свойство высоты от border до border
-//     height = box.offsetHeight;
+ivan.exit();
 
-// console.log(width);
-// console.log(height);
+ivan.hello();
+alex.hello();
 
-
-//    // Свойтво ширины с учетом всей прокрутки ктороая скрывается под scroll
-//    let width = box.scrollWidth,
-//    // Свойство высоты с учетом всей прокрутки ктороая скрывается под scroll
-//    height = box.scrollHeight;
-
-// console.log(width);
-// console.log(height);
-
-
-// // Раскрыть весь текст который скрыт
-// btn.addEventListener('click', function() {
-//     box.style.height = box.scrollHeight + 'px';
-
-// });
-
-// Получение координатов элемента
-console.log(box.getBoundingClientRect());
-
-// Чтобы получить ширину документа
-console.log(document.documentElement.clientWidth);
-
-// Чтобы получить высоту документа
-console.log(document.documentElement.clientHeight);
-
-// Прокрутить вверх, единственное значение которое  можно изменять
-btn.addEventListener('click', function() {
-    console.log(box.scrollTop);
-    box.scrollTop = 0;
-});
-
-
-// Перемещение страницы по координатам x, y относилетьно нашего положения
-// 1) на столько пикселей вниз
-scrollBy(0, 200);
-
-//2) в определённое место в пикселях
-scrollTo(0, 200);
+console.log(ivan);
+console.log(alex);
