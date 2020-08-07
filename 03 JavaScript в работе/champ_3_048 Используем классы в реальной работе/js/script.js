@@ -221,44 +221,65 @@ window.addEventListener('DOMContentLoaded', () => {
     //  Используем классы для карточек
 
     class MmenuCard {
-        constructor(src, alt, title, descr, price) {
+        constructor(src, alt, title, descr, price, perentSelector) {
             this.src = src;
             this.alt = alt;
             this.title = title;
             this.descr = descr;
             this.price = price;
+            this.perent = document.querySelector(perentSelector);
             this.transfer = 27;
             this.changeToUAH();
         }
 
         changeToUAH() {
-            this.price = this.price * this.transfer;
+            this.price = +this.price * this.transfer;
         }
 
         render() {
             const element = document.createElement('div');
             element.innerHTML = `
                 <div class="menu__item">
-                        <img src="img/tabs/vegy.jpg" alt="vegy">
-                        <h3 class="menu__item-subtitle">Меню "Фитнес"</h3>
-                        <div class="menu__item-descr">Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!</div>
-                        <div class="menu__item-divider"></div>
-                        <div class="menu__item-price">
-                            <div class="menu__item-cost">Цена:</div>
-                            <div class="menu__item-total"><span>229</span> грн/день</div>
-                        </div>
+                    <img src=${this.src} alt=${this.alt}>
+                    <h3 class="menu__item-subtitle">${this.title}</h3>
+                    <div class="menu__item-descr">${this.descr}</div>
+                    <div class="menu__item-divider"></div>
+                    <div class="menu__item-price">
+                        <div class="menu__item-cost">Цена:</div>
+                        <div class="menu__item-total"><span>${this.price}</span> грн/день</div>
                     </div>
-                    <div class="menu__item">
-                        <img src="img/tabs/elite.jpg" alt="elite">
-                        <h3 class="menu__item-subtitle">Меню “Премиум”</h3>
-                        <div class="menu__item-descr">В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!</div>
-                        <div class="menu__item-divider"></div>
-                        <div class="menu__item-price">
-                            <div class="menu__item-cost">Цена:</div>
-                            <div class="menu__item-total"><span>550</span> грн/день</div>
-                        </div>
-                    </div>
+                </div>  
             `;
+            this.perent.append(element); // помещяет элемент в родителя
         }
     }
+
+    new MmenuCard(
+        "img/tabs/vegy.jpg",
+        "vegy",
+        'Меню "Фитнес"',
+        'Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!',
+        9,
+        '.menu .container'
+    ).render();
+
+    new MmenuCard(
+        "img/tabs/elite.jpg",
+        "elite",
+        'Меню “Премиум”',
+        'В меню “Премиум” мы используем не только красивый дизайн упаковки, но и качественное исполнение блюд. Красная рыба, морепродукты, фрукты - ресторанное меню без похода в ресторан!',
+        14,
+        '.menu .container'
+    ).render();
+
+    new MmenuCard(
+        "img/tabs/post.jpg",
+        "post",
+        'Меню "Постное"',
+        'Меню “Постное” - это тщательный подбор ингредиентов: полное отсутствие продуктов животного происхождения, молоко из миндаля, овса, кокоса или гречки, правильное количество белков за счет тофу и импортных вегетарианских стейков. ',
+        21,
+        '.menu .container'
+    ).render();
+
+    
 });
