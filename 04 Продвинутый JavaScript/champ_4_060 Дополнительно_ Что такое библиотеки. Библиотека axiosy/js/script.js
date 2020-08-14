@@ -272,12 +272,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Для шаблонизации
 
-    getResource('http://localhost:3000/menu')
-        .then(data => {
-            data.forEach(({img, altimg, title, descr, price}) => {
-                new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
-            });
-        });
+    // getResource('http://localhost:3000/menu')
+    // .then(data => {
+    //     data.forEach(({img, altimg, title, descr, price}) => {
+    //         new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+    //     });
+    //     });
 
     // Для одного раза
 
@@ -305,6 +305,23 @@ window.addEventListener('DOMContentLoaded', () => {
     //    });
     //}
 
+
+    axios.get('http://localhost:3000/menu')
+        .then(data => {
+            data.data.forEach(({
+                img,
+                altimg,
+                title,
+                descr,
+                price
+            }) => {
+                new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
+            });
+        });
+
+
+
+
     // Forms
 
     const forms = document.querySelectorAll('form');
@@ -320,7 +337,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
 
-  // для работы синхронного кода async в паре с await
+    // для работы синхронного кода async в паре с await
     const postData = async (url, data) => {
         const res = await fetch(url, {
             method: "POST",
@@ -354,42 +371,42 @@ window.addEventListener('DOMContentLoaded', () => {
 
 
             postData('http://localhost:3000/requests', json)
-            .then(data => {
-                console.log(data);
-                showThanksModal(message.success);
-                statusMessage.remove();
-            }).catch(() => {
-                showThanksModal(message.failure);
-            }).finally(() => {
-                form.reset();
-            });
+                .then(data => {
+                    console.log(data);
+                    showThanksModal(message.success);
+                    statusMessage.remove();
+                }).catch(() => {
+                    showThanksModal(message.failure);
+                }).finally(() => {
+                    form.reset();
+                });
 
         });
     }
 
-       function showThanksModal(message) {
-            const prevModalDialog = document.querySelector('.modal__dialog');
+    function showThanksModal(message) {
+        const prevModalDialog = document.querySelector('.modal__dialog');
 
-            prevModalDialog.classList.add('hide');
-            openModal();
+        prevModalDialog.classList.add('hide');
+        openModal();
 
-            const thanksModal = document.createElement('div');
-            thanksModal.classList.add('modal__dialog');
-            thanksModal.innerHTML = `
+        const thanksModal = document.createElement('div');
+        thanksModal.classList.add('modal__dialog');
+        thanksModal.innerHTML = `
             <div class="modal__content">
                 <div class="modal__closse" data-close>×</div>
                 <div class="modal__title">${message}</div>
             </div>
         `;
 
-            document.querySelector('.modal').append(thanksModal);
-            setTimeout(() => {
-                thanksModal.remove();
-                prevModalDialog.classList.add('show');
-                prevModalDialog.classList.remove('hide');
-                closeModal();
-            }, 4000);
-        }
+        document.querySelector('.modal').append(thanksModal);
+        setTimeout(() => {
+            thanksModal.remove();
+            prevModalDialog.classList.add('show');
+            prevModalDialog.classList.remove('hide');
+            closeModal();
+        }, 4000);
+    }
 
     //fetch('http://localhost:3000/menu')
     //    .then(data => data.json())
