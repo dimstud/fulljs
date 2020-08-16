@@ -5,43 +5,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // Tabs
 
 
-    // const tabs = document.querySelectorAll('.tabheader__item'),
-    //       tabsContent = document.querySelectorAll('.tabcontent'),
-    //       tabsParent = document.querySelector('.tabheader__items');
-
-
-    // function hideTabContent() {
-    //     tabsContent.forEach(item => {
-    //         item.style.display = 'none';
-    //     });
-
-    //     tabs.forEach(item => {
-    //         item.classList.remove('tabheader__item_active');
-    //     });
-    // }
-
-    // function showTabContent(i = 0) {
-    //     tabsContent[i].style.display = 'block';
-    //     tabs[i].classList.add('tabheader__item_active');
-    // }
-
-    // hideTabContent();
-    // showTabContent();
-
-    // // Открывает какждое окно соответствующее названию в меню
-    // tabsParent.addEventListener('click', (event) => {
-    //     const target = event.target;
-
-    //     if (target && target.classList.contains('tabheader__item')) {
-    //         tabs.forEach( (item, i) => {
-    //             if (target == item) {
-    //                 hideTabContent();
-    //                 showTabContent(i);
-    //             }
-    //         });
-    //     }
-    // });
-
     // С использованием классов
     const tabs = document.querySelectorAll('.tabheader__item'),
         tabsContent = document.querySelectorAll('.tabcontent'),
@@ -270,40 +233,7 @@ window.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // Для шаблонизации
-
-    // getResource('http://localhost:3000/menu')
-    // .then(data => {
-    //     data.forEach(({img, altimg, title, descr, price}) => {
-    //         new MenuCard(img, altimg, title, descr, price, '.menu .container').render();
-    //     });
-    //     });
-
-    // Для одного раза
-
-    //getResource('http://localhost:3000/menu')
-    //    .then(data => createCard(data));
-
-    //function createCard(data) {
-    //    data.forEach(({ img, altimg, title, descr, price }) => {
-    //        const element = document.createElement('div');
-
-    //        price = +price * 27;
-    //        element.classList.add('menu__item');
-    //        element.innerHTML = `
-    //            <img src=${img} alt=${altimg}>
-    //            <h3 class="menu__item-subtitle">${title}</h3>
-    //            <div class="menu__item-descr">${descr}</div>
-    //            <div class="menu__item-divider"></div>
-    //            <div class="menu__item-price">
-    //                <div class="menu__item-cost">Цена:</div>
-    //                <div class="menu__item-total"><span>${price}</span> грн/день</div>
-    //            </div>
-    //        `;
-
-    //        document.querySelector('.menu .container').append(element);
-    //    });
-    //}
+  
 
 
     axios.get('http://localhost:3000/menu')
@@ -408,7 +338,55 @@ window.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     }
 
-    //fetch('http://localhost:3000/menu')
-    //    .then(data => data.json())
-    //    .then(res => console.log(res));
+
+
+    // Slider
+
+    const slides = document.querySelectorAll('.offer__slide'),
+        prev = document.querySelector('.offer__slider-prev'),
+        next = document.querySelector('.offer__slider-next'),
+        total = document.querySelector('#total'),
+        current = document.querySelector('#current');
+    let slideIndex = 1;
+
+    showSlides(slideIndex);
+
+    if (slides.length < 10) {
+        total.textContent = `0${slides.length}`;
+    } else {
+        total.textContent = slides.length;
+    }
+
+    function showSlides(n) {
+        if (n > slides.length) {
+            slideIndex = 1;
+        }
+
+        if (n < 1) {
+            slideIndex = slides.length;
+        }
+
+        slides.forEach(item => item.style.display = 'none');
+
+        slides[slideIndex - 1].style.display = 'block';
+
+        if (slides.length < 10) {
+            current.textContent = `0${slideIndex}`;
+        } else {
+            current.textContent = slideIndex;
+        }
+    }
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    prev.addEventListener('click', () => {
+        plusSlides(-1);
+    });
+
+    next.addEventListener('click', () => {
+        plusSlides(1);
+
+    });
 });
