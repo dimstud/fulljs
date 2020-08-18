@@ -498,4 +498,8 @@ window.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+
+    // CALC
+
+    const result = document.querySelector('.calculating__result span');
 });
