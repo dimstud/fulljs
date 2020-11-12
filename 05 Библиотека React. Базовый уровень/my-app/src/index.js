@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const elem = <h2>Hello World!</h2>
+// const elem = React.createElement('h2', null, "Hello World!!!")
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    elem,
   document.getElementById('root')
 );
 
