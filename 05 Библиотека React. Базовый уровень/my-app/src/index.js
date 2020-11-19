@@ -55,5 +55,5 @@ const All = () => {
 	)
 }
 
-ReactDOM.render(<All/>, document.getElementById('root'));
+ReactDOM.render(<App/>, document.getElementById('root'));
 
