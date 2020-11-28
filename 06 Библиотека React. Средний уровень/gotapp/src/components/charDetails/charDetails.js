@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import gotService from '../../services/gotService'
+import gotService from '../../services/gotService';
 import './charDetails.css';
 export default class CharDetails extends Component {
 
@@ -28,7 +28,7 @@ export default class CharDetails extends Component {
             .then((char) => {
                 this.setState({char})
             })
-            this.foo.bar = 0;
+            // this.foo.bar = 0;
     }
 
     render() {
