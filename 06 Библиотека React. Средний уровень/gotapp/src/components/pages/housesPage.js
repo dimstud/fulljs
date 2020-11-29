@@ -53,3 +53,8 @@ export default class HousesPage extends Component {
         )
     }
 }
+
+// // Передем пустую фун чтобы сайт не сломался
+// ItemList.defaultProps = {
+//     onItemSelected: () => {}
+// }
