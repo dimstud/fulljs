@@ -10,9 +10,9 @@ export default class ItemList extends Component {
 
     componentDidMount() {
         const {getData} = this.props;
- 
+
         getData()
-            .then((itemList) => {
+            .then( (itemList) => {
                 this.setState({
                     itemList
                 })
@@ -22,13 +22,14 @@ export default class ItemList extends Component {
     renderItems(arr) {
         return arr.map((item) => {
             const {id} = item;
+
             const label = this.props.renderItem(item);
 
             return (
                 <li 
                     key={id}
                     className="list-group-item"
-                    onClick={() => this.props.onItemSelected(id)}>
+                    onClick={ () => this.props.onItemSelected(id)}>
                     {label}
                 </li>
             )
@@ -36,7 +37,6 @@ export default class ItemList extends Component {
     }
 
     render() {
-
         const {itemList} = this.state;
 
         if (!itemList) {
@@ -44,6 +44,7 @@ export default class ItemList extends Component {
         }
 
         const items = this.renderItems(itemList);
+
 
         return (
             <ul className="item-list list-group">
